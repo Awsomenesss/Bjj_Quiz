@@ -20,6 +20,7 @@ questions_worksheet = SHEET.worksheet('Quiz Questions')
 
 # Read the questions, options, and answers from the worksheet
 questions_data = questions_worksheet.get_all_values()
+
 questions_data = questions_data[1:]
 
 
@@ -28,8 +29,8 @@ def validate_input(input_value):
     Validates answers provided by the user.
     """
     valid_inputs = ['1', '2', '3']
-    if input_value.lower() not in valid_inputs:
-        raise ValueError('Please select a valid option (1, 2, or 3).')
+    if input_value not in valid_inputs:
+        raise ValueError('Please select a valid option (1, 2, or 3)!')
 
     return input_value
 
@@ -69,6 +70,8 @@ def quiz():
         else:
             print('Incorrect!')
 
+
+        
         time.sleep(1)
         question_index += 1
 
