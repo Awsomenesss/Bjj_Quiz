@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import time
-import os
 
 
 # Load credentials for accessing the Google Sheets API
@@ -10,7 +9,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
-         
+
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -21,14 +20,25 @@ questions_worksheet = SHEET.worksheet('Quiz Questions')
 
 # Read the questions, options, and answers from the worksheet
 questions_data = questions_worksheet.get_all_values()
-questions_data = questions_data[1:]  # Skip the header row
+questions_data = questions_data[1:]
+
+
+def validate_input(input_value):
+    """
+    Validates answers provided by the user.
+    """
+    valid_inputs = ['1', '2', '3']
+    if input_value.lower() not in valid_inputs:
+        raise ValueError('Please select a valid option (1, 2, or 3).')
+
+    return input_value
 
 
 def quiz():
     """
     Start the quiz and ask the questions.
     """
-    score = 0  # Initialize the score variable
+    score = 0
     total_questions = len(questions_data)
     question_index = 1
 
@@ -43,7 +53,15 @@ def quiz():
         print('2) ' + options[1])
         print('3) ' + options[2])
 
-        answer = input('Enter your answer (1, 2, or 3): ')
+        while True:
+            answer = input('Enter your answer (1, 2, or 3): ')
+            print(f"User input: {answer}")
+
+            try:
+                validate_input(answer)
+                break  
+            except ValueError as e:
+                print(str(e))  
 
         if int(answer) == correct_answer:
             score += 1
@@ -56,7 +74,8 @@ def quiz():
 
     print('Quiz Complete!')
     print('----------------')
-    print('Question ' + str(question_index) + '/' + str(total_questions))
+    print('Score: ' + str(score) + '/' + str(total_questions))
     input('Press any key to exit: ')
+
 
 quiz()
