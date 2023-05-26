@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import time
+from datetime import datetime
 
 
 # Load credentials for accessing the Google Sheets API
@@ -15,14 +16,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('BJJ quiz')
 
-# Open the worksheet containing the questions
-questions_worksheet = SHEET.worksheet('Quiz Questions')
-
-# Read the questions, options, and answers from the worksheet
-questions_data = questions_worksheet.get_all_values()
-
-questions_data = questions_data[1:]
-
 
 def validate_input(input_value):
     """
@@ -35,10 +28,31 @@ def validate_input(input_value):
     return input_value
 
 
+def update_score_worksheet(username, score):
+    """
+    Update score worksheet with the user's score, username, and timestamp
+    """
+    print("Updating score worksheet...\n")
+    score_worksheet = SHEET.worksheet("Score")
+    
+    # Get the current timestamp
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Append a new row with the username, score, and timestamp
+    score_worksheet.append_row([username, score, timestamp])
+    print("Result was saved successfully.\n")
+
+
 def quiz():
     """
     Start the quiz and ask the questions.
     """
+    # Open the worksheet containing the questions
+    questions_worksheet = SHEET.worksheet('Quiz Questions')
+
+    # Read the questions, options, and answers from the worksheet
+    questions_data = questions_worksheet.get_all_values()[1:]
+
     score = 0
     total_questions = len(questions_data)
     question_index = 1
@@ -60,9 +74,9 @@ def quiz():
 
             try:
                 validate_input(answer)
-                break  
+                break
             except ValueError as e:
-                print(str(e))  
+                print(str(e))
 
         if int(answer) == correct_answer:
             score += 1
@@ -70,15 +84,19 @@ def quiz():
         else:
             print('Incorrect!')
 
-
-        
         time.sleep(1)
         question_index += 1
 
     print('Quiz Complete!')
     print('----------------')
     print('Score: ' + str(score) + '/' + str(total_questions))
-    input('Press any key to exit: ')
+    
+    save_score = input("Do you want to save your score? (y/n): ")
+    if save_score.lower() == "y":
+        save_as = input("Enter a name to save the score as: ")
+        update_score_worksheet(save_as, score)
+
+    input('Press Enter to exit ')
 
 
 quiz()
