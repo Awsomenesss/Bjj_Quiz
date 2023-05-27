@@ -6,6 +6,8 @@ This is a simple quiz application that tests your knowledge of Brazilian Jiu Jit
 
 A live version of the game can be found [here](https://bjjquiz.herokuapp.com/).
 
+
+
 ## Features
 
 - Multiple-choice quiz questions: The quiz consists of a set of questions related to BJJ, with three possible answers for each question.
@@ -25,6 +27,16 @@ A live version of the game can be found [here](https://bjjquiz.herokuapp.com/).
 - The application will display the highest score recorded in the "Score" worksheet, along with the corresponding name and timestamp.
 
 
+##Testing
+I performed manual testing continuously as the application was being developed.
+- Verify that the quiz questions are displayed correctly.
+- Test user input validation to handle incorrect input (e.g., entering a non-numeric value).
+- Test the score calculation to ensure that it accurately reflects the user's performance.
+- Check if the user is prompted to save their score at the end of the quiz.
+- Test the restart functionality to ensure that the quiz can be played again.
+
+
+
 ## Technologies Used
 The BJJ Quiz application utilizes the following technologies:
 - Python: The core programming language used to develop the application.
@@ -33,6 +45,8 @@ The BJJ Quiz application utilizes the following technologies:
 - Codeanywhere: An online integrated development environment (IDE) used for code editing and tutering 
 - gspread: A Python library for accessing the Google Sheets API.
 - oauth2client: A Python library for handling OAuth 2.0 authentication.
+
+
 
 
 ## Credits
