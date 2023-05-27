@@ -93,9 +93,8 @@ def quiz():
     # Open the worksheet containing the questions
     
     
-    # Read the questions, options, and answers from the worksheet
-    
     questions_data = questions_worksheet.get_all_values()[1:]
+    # Read the questions, options, and answers from the worksheet
 
     score = 0
     total_questions = len(questions_data)
@@ -153,7 +152,7 @@ def restart():
 
         play_again = input("Do you want to restart? [y/n]: ")
         if play_again.lower() != "y":
-            break
+            return
 
 
 print("Welcome to BJJ Quiz")
