@@ -27,8 +27,10 @@ A live version of the game can be found [here](https://bjjquiz.herokuapp.com/).
 - The application will display the highest score recorded in the "Score" worksheet, along with the corresponding name and timestamp.
 
 
-##Testing
+## Testing
+
 I performed manual testing continuously as the application was being developed.
+
 - Verify that the quiz questions are displayed correctly.
 - Test user input validation to handle incorrect input (e.g., entering a non-numeric value).
 - Test the score calculation to ensure that it accurately reflects the user's performance.
