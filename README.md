@@ -1,32 +1,42 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# BJJ QUIZ
 
-Welcome,
+## Introduction
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+This is a simple quiz application that tests your knowledge of Brazilian Jiu Jitsu (BJJ). The application is implemented in Python and interacts with the Google Sheets API to store and retrieve quiz questions and scores.
 
-## Reminders
+A live version of the game can be found [here](https://bjjquiz.herokuapp.com/).
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Features
 
-## Creating the Heroku app
+- Multiple-choice quiz questions: The quiz consists of a set of questions related to BJJ, with three possible answers for each question.
+- Answer validation: User input is validated to ensure that only valid answers are accepted.
+- Highest score tracking: The application keeps track of the highest score achieved and displays it to the user.
+- Score saving: Users have the option to save their scores, including their name and timestamp, to a Google Sheets document.
+- Restart functionality: After completing the quiz, users can choose to restart and play the quiz again.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
-1. `heroku/python`
-2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## How to use 
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+- Follow the instructions provided on the console to answer the quiz questions. Enter the corresponding number (1, 2, or 3) for your answer and press Enter. If you want to quit the quiz, enter 'q' and press Enter.
 
-Connect your GitHub repository and deploy as normal.
+- At the end of the quiz, you will have the option to save your score. Enter 'y' to save your score and provide a name for the score entry.
 
-## Constraints
+- The application will display the highest score recorded in the "Score" worksheet, along with the corresponding name and timestamp.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
----
+## Technologies Used
+The BJJ Quiz application utilizes the following technologies:
+- Python: The core programming language used to develop the application.
+- Heroku: A cloud platform that enables deployment and hosting of the application.
+- GitHub: A version control platform used for code repository and collaboration.
+- Codeanywhere: An online integrated development environment (IDE) used for code editing and tutering 
+- gspread: A Python library for accessing the Google Sheets API.
+- oauth2client: A Python library for handling OAuth 2.0 authentication.
 
-Happy coding!
+
+## Credits
+
+- love sandwiches walkthrough project 
+- GitHub Python Template 
+- Heroku deployment instructions from Code Institute
