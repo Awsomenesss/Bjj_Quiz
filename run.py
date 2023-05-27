@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 
 
+
 # Load credentials for accessing the Google Sheets API
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -21,9 +22,9 @@ def validate_input(input_value):
     """
     Validates answers provided by the user.
     """
-    valid_inputs = ['1', '2', '3']
+    valid_inputs = ['1', '2', '3', 'q']
     if input_value not in valid_inputs:
-        raise ValueError('Please select a valid option (1, 2, or 3)!')
+        raise ValueError('Invalid input! select (1, 2, 3, or q)! Try again.')
 
     return input_value
 
@@ -34,10 +35,10 @@ def update_score_worksheet(username, score):
     """
     print("Updating score worksheet...\n")
     score_worksheet = SHEET.worksheet("Score")
-    
+
     # Get the current timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
+
     # Append a new row with the username, score, and timestamp
     score_worksheet.append_row([username, score, timestamp])
     print("Result was saved successfully.\n")
@@ -64,16 +65,19 @@ def quiz():
 
         print('----------------')
         print(question)
-        print('1) ' + options[0])
-        print('2) ' + options[1])
-        print('3) ' + options[2])
+        print('[1] ' + options[0])
+        print('[2] ' + options[1])
+        print('[3] ' + options[2])
 
         while True:
-            answer = input('Enter your answer (1, 2, or 3): ')
+            answer = input('Enter your answer (1, 2, 3) or press q to quit: ')
             print(f"User input: {answer}")
 
             try:
                 validate_input(answer)
+                if answer == 'q':
+                    print('You Tapped out ')
+                    sys.exit()
                 break
             except ValueError as e:
                 print(str(e))
@@ -90,13 +94,15 @@ def quiz():
     print('Quiz Complete!')
     print('----------------')
     print('Score: ' + str(score) + '/' + str(total_questions))
-    
-    save_score = input("Do you want to save your score? (y/n): ")
+
+    save_score = input("Do you want to save your score? [y/n]: ")
     if save_score.lower() == "y":
-        save_as = input("Enter a name to save the score as: ")
+        save_as = input("save this score as: ")
         update_score_worksheet(save_as, score)
 
-    input('Press Enter to exit ')
-
+    
+print("Welcome to BJJ Quiz")
+print("This is a quiz to check your knowledge on Brazilian Jiu Jitsu")
+print("Choose 1, 2, or 3 to select your answer and press enter to proceed to the next question")
 
 quiz()
