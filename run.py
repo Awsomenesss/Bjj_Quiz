@@ -36,13 +36,17 @@ def get_highest_score():
     print("Checking highest score...")
     score_worksheet = SHEET.worksheet("Score")
 
-    # Get all the values from the score sheet
+    """
+    Get all the values from the score sheet
+    """
     score_data = score_worksheet.get_all_values()
 
     highest_score = 0
     highest_score_rows = []
 
-    # Iterate over the score data to find the highest score
+    """
+     Iterate over the score data to find the highest score
+    """
     for row in score_data[1:]:
         score = int(row[1])
         if score > highest_score:
@@ -50,21 +54,17 @@ def get_highest_score():
             highest_score_rows = [row]
         elif score == highest_score:
             highest_score_rows.append(row)
-
-    if highest_score_rows:
         print("Highest Score so far is :")
         for row in highest_score_rows:
             name = row[0]
             score = row[1]
             timestamp = row[2]
-            print(f"Name: {name}")
             print(f"Score: {score}")
+            print(f"Name: {name}")
             print(f"Timestamp: {timestamp}")
             print("---")
-    else:
-        print("No scores available.")
     
-
+    
 def update_score_worksheet(username, score):
     """
     Update score worksheet with the user's score, username, and timestamp
@@ -74,21 +74,27 @@ def update_score_worksheet(username, score):
 
     # Get the current timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    # Append a new row with the username, score, and timestamp
     score_worksheet.append_row([username, score, timestamp])
+    
     print("Result was saved successfully.\n")
+    
     get_highest_score()
-
+    
+    # Append a new row with the username, score, and timestamp
+    
 
 def quiz():
     """
     Start the quiz and ask the questions.
     """
-    # Open the worksheet containing the questions
+    
     questions_worksheet = SHEET.worksheet('Quiz Questions')
-
+    
+    # Open the worksheet containing the questions
+    
+    
     # Read the questions, options, and answers from the worksheet
+    
     questions_data = questions_worksheet.get_all_values()[1:]
 
     score = 0
