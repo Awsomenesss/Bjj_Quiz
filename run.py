@@ -3,9 +3,9 @@ from google.oauth2.service_account import Credentials
 import time
 from datetime import datetime
 
-
-
-# Load credentials for accessing the Google Sheets API
+"""
+Load credentials for accessing the Google Sheets API
+"""
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -103,6 +103,6 @@ def quiz():
     
 print("Welcome to BJJ Quiz")
 print("This is a quiz to check your knowledge on Brazilian Jiu Jitsu")
-print("Choose 1, 2, or 3 to select your answer and press enter to proceed to the next question")
+print("select 1, 2, or 3 to answer and press enter to proceed to the next question")
 
 quiz()
